@@ -1,5 +1,8 @@
 #!/bin/bash
-# Generator script for all 60 exercises
+# DEPRECATED historical generator for the original 60 exercises.
+# Do NOT re-run this against the current tree — it would overwrite Modules 08–11
+# (Viper, Datadog-style tracing, Redis/DynamoDB/SNS) with placeholders.
+# Prefer editing exercise folders directly. Current count: 66 exercises.
 BASE="c:/Users/Wagner Caetano/git/study-java-to-golang-developer/exercises"
 
 # ===== MODULE 01: BASICS =====

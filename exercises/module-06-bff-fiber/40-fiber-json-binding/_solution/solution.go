@@ -1,13 +1,20 @@
-package fiberex
+package fiberjson
 
 import "github.com/gofiber/fiber/v2"
 
-// SetupApp creates a Fiber app with the required configuration
+type CreateUserRequest struct {
+	Name  string `json:"name"`
+	Email string `json:"email"`
+}
+
 func SetupApp() *fiber.App {
 	app := fiber.New()
-	// TODO: Implement the exercise requirements
-	app.Get("/ping", func(c *fiber.Ctx) error {
-		return c.SendString("pong")
+	app.Post("/users", func(c *fiber.Ctx) error {
+		var req CreateUserRequest
+		if err := c.BodyParser(&req); err != nil {
+			return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"error": "invalid body"})
+		}
+		return c.Status(fiber.StatusCreated).JSON(req)
 	})
 	return app
 }

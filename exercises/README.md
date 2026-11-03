@@ -1,11 +1,11 @@
 # Exercises: Java to Go — Hands-On Practice
 
-> 60 exercises organized in 10 modules, from Go basics to full BFF integration.
+> 66 exercises organized in 11 modules, from Go basics to data & messaging patterns.
 
 ## How Exercises Work
 
 Each exercise folder contains:
-- **`README.md`** — Problem description
+- **`README.md`** — Problem description and learning objectives
 - **`solution.go`** — Broken/stub code for you to fix
 - **`solution_test.go`** — Tests that validate your fix
 - **`_solution/`** — Working solution (cheating! 😄)
@@ -85,44 +85,54 @@ go test -v
 |---|----------|-------|
 | 37 | [fiber-hello-world](module-06-bff-fiber/37-fiber-hello-world/) | First Fiber app |
 | 38 | [fiber-routing-and-params](module-06-bff-fiber/38-fiber-routing-and-params/) | Path/query params |
-| 39 | [fiber-middleware](module-06-bff-fiber/39-fiber-middleware/) | Custom middleware |
-| 40 | [fiber-json-binding](module-06-bff-fiber/40-fiber-json-binding/) | JSON handling |
-| 41 | [fiber-group-routes](module-06-bff-fiber/41-fiber-group-routes/) | Route groups |
-| 42 | [fiber-error-handling](module-06-bff-fiber/42-fiber-error-handling/) | Centralized errors |
+| 39 | [fiber-middleware](module-06-bff-fiber/39-fiber-middleware/) | X-Request-ID middleware |
+| 40 | [fiber-json-binding](module-06-bff-fiber/40-fiber-json-binding/) | BodyParser + 201/400 |
+| 41 | [fiber-group-routes](module-06-bff-fiber/41-fiber-group-routes/) | `/api/v1` route groups |
+| 42 | [fiber-error-handling](module-06-bff-fiber/42-fiber-error-handling/) | JSON ErrorHandler |
 
 ## Module 07: Resilience Patterns (Exercises 43-48)
 | # | Exercise | Topic |
 |---|----------|-------|
 | 43 | [circuit-breaker](module-07-resilience/43-circuit-breaker/) | Circuit breaker |
 | 44 | [retry-with-backoff](module-07-resilience/44-retry-with-backoff/) | Exponential backoff |
-| 45 | [rate-limiting](module-07-resilience/45-rate-limiting/) | Token bucket |
-| 46 | [timeout-patterns](module-07-resilience/46-timeout-patterns/) | HTTP timeouts |
-| 47 | [graceful-shutdown](module-07-resilience/47-graceful-shutdown/) | Graceful shutdown |
-| 48 | [health-check-endpoint](module-07-resilience/48-health-check-endpoint/) | Health checks |
+| 45 | [rate-limiting](module-07-resilience/45-rate-limiting/) | Token bucket limiter |
+| 46 | [timeout-patterns](module-07-resilience/46-timeout-patterns/) | Context timeout wrapper |
+| 47 | [graceful-shutdown](module-07-resilience/47-graceful-shutdown/) | Cancel + WaitGroup shutdown |
+| 48 | [health-check-endpoint](module-07-resilience/48-health-check-endpoint/) | `/health` + `/ready` |
 
 ## Module 08: Observability (Exercises 49-53)
 | # | Exercise | Topic |
 |---|----------|-------|
-| 49 | [structured-logging](module-08-observability/49-structured-logging/) | slog structured logging |
-| 50 | [request-tracing](module-08-observability/50-request-tracing/) | Request ID tracing |
-| 51 | [middleware-logging](module-08-observability/51-middleware-logging/) | Request/response logging |
-| 52 | [distributed-tracing](module-08-observability/52-distributed-tracing/) | OpenTelemetry |
-| 53 | [metrics-collection](module-08-observability/53-metrics-collection/) | Prometheus metrics |
+| 49 | [structured-logging](module-08-observability/49-structured-logging/) | slog JSON logging |
+| 50 | [request-tracing](module-08-observability/50-request-tracing/) | X-Request-ID middleware |
+| 51 | [middleware-logging](module-08-observability/51-middleware-logging/) | Access logs with slog |
+| 52 | [distributed-tracing](module-08-observability/52-distributed-tracing/) | Tracer interface (Datadog-style) |
+| 53 | [metrics-collection](module-08-observability/53-metrics-collection/) | Labelled HTTP counters |
 
-## Module 09: Kubernetes Config (Exercises 54-56)
+## Module 09: Configuration with Viper (Exercises 54-56)
 | # | Exercise | Topic |
 |---|----------|-------|
-| 54 | [environment-config](module-09-kubernetes-config/54-environment-config/) | Env var config |
-| 55 | [hot-reload-configmap](module-09-kubernetes-config/55-hot-reload-configmap/) | ConfigMap reload |
-| 56 | [feature-flags](module-09-kubernetes-config/56-feature-flags/) | Dynamic feature flags |
+| 54 | [environment-config](module-09-viper-config/54-environment-config/) | Env var config |
+| 55 | [hot-reload-configmap](module-09-viper-config/55-hot-reload-configmap/) | Viper YAML/JSON hot reload |
+| 56 | [feature-flags](module-09-viper-config/56-feature-flags/) | Dynamic feature flags |
 
 ## Module 10: Advanced BFF Patterns (Exercises 57-60)
 | # | Exercise | Topic |
 |---|----------|-------|
-| 57 | [parallel-http-requests](module-10-advanced/57-parallel-http-requests/) | Parallel requests |
-| 58 | [response-aggregation](module-10-advanced/58-response-aggregation/) | BFF aggregation |
-| 59 | [pooling-and-reuse](module-10-advanced/59-pooling-and-reuse/) | sync.Pool |
-| 60 | [full-bff-integration](module-10-advanced/60-full-bff-integration/) | Complete BFF |
+| 57 | [parallel-http-requests](module-10-advanced/57-parallel-http-requests/) | Concurrent FetchAll + cancel |
+| 58 | [response-aggregation](module-10-advanced/58-response-aggregation/) | Parallel dashboard aggregate |
+| 59 | [pooling-and-reuse](module-10-advanced/59-pooling-and-reuse/) | sync.Pool buffer reuse |
+| 60 | [full-bff-integration](module-10-advanced/60-full-bff-integration/) | Fiber BFF + cache-aside |
+
+## Module 11: Data & Messaging (Exercises 61-66)
+| # | Exercise | Topic |
+|---|----------|-------|
+| 61 | [redis-get-set](module-11-data-messaging/61-redis-get-set/) | Cache Client / Get-Set |
+| 62 | [redis-cache-aside](module-11-data-messaging/62-redis-cache-aside/) | GetOrLoad cache-aside |
+| 63 | [dynamodb-put-get](module-11-data-messaging/63-dynamodb-put-get/) | DynamoDB Put/Get (in-memory) |
+| 64 | [dynamodb-query](module-11-data-messaging/64-dynamodb-query/) | Query by partition key |
+| 65 | [sns-publish](module-11-data-messaging/65-sns-publish/) | SNS Publish interface |
+| 66 | [event-outbox-pattern](module-11-data-messaging/66-event-outbox-pattern/) | Transactional outbox |
 
 ---
 

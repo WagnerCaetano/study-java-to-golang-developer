@@ -1,13 +1,10 @@
-package fiberex
+package fibergroup
 
 import "github.com/gofiber/fiber/v2"
 
-// SetupApp creates a Fiber app with the required configuration
+// SetupApp registers versioned API routes under /api/v1.
+// FIX ME: Group /api/v1, subgroup /users with GET / and GET /:id.
 func SetupApp() *fiber.App {
 	app := fiber.New()
-	// TODO: Implement the exercise requirements
-	app.Get("/ping", func(c *fiber.Ctx) error {
-		return c.SendString("pong")
-	})
 	return app
 }
