@@ -34,19 +34,23 @@
 
 Exercises follow an **Exercism-style** format: read the problem, fix the broken code, run tests to validate. Full index: [exercises/README.md](exercises/README.md).
 
-| Module | Focus | Exercises |
-|--------|-------|-----------|
-| 01 Basics | Language foundations | 01–08 |
-| 02 Collections | Slices, maps, embedding | 09–14 |
-| 03 Errors | Errors as values | 15–20 |
-| 04 Concurrency | Goroutines, channels, context | 21–30 |
-| 05 Testing | Table tests, mocks, benchmarks | 31–36 |
-| 06 BFF / Fiber | Fiber v2 routing & middleware | 37–42 |
-| 07 Resilience | Circuit breaker, retry, health | 43–48 |
-| 08 Observability | slog, request IDs, Datadog-style tracer, metrics | 49–53 |
-| 09 Viper Config | Env, YAML/JSON hot reload, feature flags | 54–56 |
-| 10 Advanced BFF | Parallel fan-out, aggregation, pooling | 57–60 |
-| 11 Data & Messaging | Redis, DynamoDB, SNS, outbox | 61–66 |
+### Book chapters ↔ exercise modules
+
+Chapter numbers and module numbers are **not 1:1**. A single exercise module often covers **several** book chapters (topics grouped for practice). Example: after reading chapters **01–03**, work through **Module 01 — Basics**.
+
+| Exercise module | Book chapters it practices | Exercises |
+|-----------------|----------------------------|-----------|
+| 01 Basics | **01** Fundamentals, **02** Structs & Methods, **03** Interfaces | 01–08 |
+| 02 Collections | **04** Arrays, Slices & Maps | 09–14 |
+| 03 Errors | **05** Error Handling | 15–20 |
+| 04 Concurrency | **06** Concurrency, **07** Context | 21–30 |
+| 05 Testing | **08** Design Patterns, **09** Testing, **10** Profiling | 31–36 |
+| 06 BFF / Fiber | **11** Building a BFF with Fiber | 37–42 |
+| 07 Resilience | **11** (ops patterns alongside Fiber) | 43–48 |
+| 08 Observability | **13** Datadog & Prometheus | 49–53 |
+| 09 Viper Config | **12** Viper, **16** Feature Flags | 54–56 |
+| 10 Advanced BFF | **11** (aggregation / pooling patterns) | 57–60 |
+| 11 Data & Messaging | **14** Redis, **15** DynamoDB & SNS | 61–66 |
 
 ### Stack mapping (where to study what)
 
@@ -71,7 +75,7 @@ Exercises follow an **Exercism-style** format: read the problem, fix the broken 
 ## How to Use
 
 1. Read book chapters in order (**00 → 16**)
-2. Work through exercises module by module
+2. After finishing the chapters listed for a module (see table above), work that exercise module — don’t expect `module-01` to mean “only chapter 01”
 3. For each exercise:
    - Read `README.md`
    - Fix the stub in `solution.go`
