@@ -4,6 +4,7 @@ package pointers
 // FIX ME: The current implementation doesn't actually swap
 func Swap(a, b *int) {
 	// FIX: Implement proper swap using a temporary variable
+	c := *a
 	*a = *b
-	*b = *a
+	*b = c
 }

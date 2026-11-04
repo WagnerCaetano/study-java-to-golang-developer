@@ -9,5 +9,5 @@ type Person struct {
 // FullName returns the person's full name
 // FIX ME: Should return "FirstName LastName" format
 func (p Person) FullName() string {
-	return "" // FIX: return proper full name
+	return p.FirstName + " " + p.LastName // FIX: return proper full name
 }

@@ -14,8 +14,14 @@ type Cat struct {
 }
 
 // FIX ME: Implement Speak() for Dog so it returns "<Name> says Woof!"
+func (d Dog) Speak() string {
+	return d.Name + " says Woof!"
+}
 
 // FIX ME: Implement Speak() for Cat so it returns "<Name> says Meow!"
+func (c Cat) Speak() string {
+	return c.Name + " says Meow!"
+}
 
 // MakeSpeak calls Speak on any Speaker
 func MakeSpeak(s Speaker) string {
