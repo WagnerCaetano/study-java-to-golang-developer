@@ -2,6 +2,27 @@
 
 > 66 exercises organized in 11 modules, from Go basics to data & messaging patterns.
 
+## Chapters vs modules
+
+**Module numbers ≠ book chapter numbers.** A module often practices several book chapters at once.  
+Example: **Module 01 — Basics** covers book chapters **01** (fundamentals), **02** (structs), and **03** (interfaces) — not only chapter 01.
+
+| Module | Book chapters | Exercises |
+|--------|---------------|-----------|
+| 01 Basics | 01, 02, 03 | 01–08 |
+| 02 Collections | 04 | 09–14 |
+| 03 Errors | 05 | 15–20 |
+| 04 Concurrency | 06, 07 | 21–30 |
+| 05 Testing | 08, 09, 10 | 31–36 |
+| 06 BFF / Fiber | 11 | 37–42 |
+| 07 Resilience | 11 (ops) | 43–48 |
+| 08 Observability | 13 | 49–53 |
+| 09 Viper Config | 12, 16 | 54–56 |
+| 10 Advanced BFF | 11 | 57–60 |
+| 11 Data & Messaging | 14, 15 | 61–66 |
+
+See also the [root README](../README.md) and [book introduction](../book/00-introduction.md).
+
 ## How Exercises Work
 
 Each exercise folder contains:
@@ -24,7 +45,7 @@ go test -v
 
 ---
 
-## Module 01: Go Basics (Exercises 01-08)
+## Module 01: Go Basics (Exercises 01-08) — book ch. 01–03
 | # | Exercise | Topic |
 |---|----------|-------|
 | 01 | [hello-go](module-01-basics/01-hello-go/) | First Go program |
@@ -36,7 +57,7 @@ go test -v
 | 07 | [methods-and-receivers](module-01-basics/07-methods-and-receivers/) | Value vs pointer receivers |
 | 08 | [interfaces](module-01-basics/08-interfaces/) | Implicit interfaces |
 
-## Module 02: Collections (Exercises 09-14)
+## Module 02: Collections (Exercises 09-14) — book ch. 04
 | # | Exercise | Topic |
 |---|----------|-------|
 | 09 | [slice-operations](module-02-collections/09-slice-operations/) | Filtering slices |
@@ -46,7 +67,7 @@ go test -v
 | 13 | [embedding-in-structs](module-02-collections/13-embedding-in-structs/) | Struct embedding |
 | 14 | [type-conversion](module-02-collections/14-type-conversion/) | Type conversion |
 
-## Module 03: Error Handling (Exercises 15-20)
+## Module 03: Error Handling (Exercises 15-20) — book ch. 05
 | # | Exercise | Topic |
 |---|----------|-------|
 | 15 | [basic-errors](module-03-error-handling/15-basic-errors/) | errors.New |
@@ -56,7 +77,7 @@ go test -v
 | 19 | [panic-and-recover](module-03-error-handling/19-panic-and-recover/) | Panic recovery |
 | 20 | [sentinel-errors](module-03-error-handling/20-sentinel-errors/) | Sentinel pattern |
 
-## Module 04: Concurrency (Exercises 21-30)
+## Module 04: Concurrency (Exercises 21-30) — book ch. 06–07
 | # | Exercise | Topic |
 |---|----------|-------|
 | 21 | [goroutine-basics](module-04-concurrency/21-goroutine-basics/) | Parallel sum |
@@ -70,7 +91,7 @@ go test -v
 | 29 | [waitgroup](module-04-concurrency/29-waitgroup/) | Goroutine synchronization |
 | 30 | [mutex-and-data-races](module-04-concurrency/30-mutex-and-data-races/) | Thread safety |
 
-## Module 05: Testing (Exercises 31-36)
+## Module 05: Testing (Exercises 31-36) — book ch. 08–10
 | # | Exercise | Topic |
 |---|----------|-------|
 | 31 | [unit-test-basics](module-05-testing/31-unit-test-basics/) | Basic testing |
@@ -80,7 +101,7 @@ go test -v
 | 35 | [benchmarking](module-05-testing/35-benchmarking/) | strings.Builder optimization |
 | 36 | [http-handler-testing](module-05-testing/36-http-handler-testing/) | httptest package |
 
-## Module 06: BFF with Fiber (Exercises 37-42)
+## Module 06: BFF with Fiber (Exercises 37-42) — book ch. 11
 | # | Exercise | Topic |
 |---|----------|-------|
 | 37 | [fiber-hello-world](module-06-bff-fiber/37-fiber-hello-world/) | First Fiber app |
@@ -90,7 +111,7 @@ go test -v
 | 41 | [fiber-group-routes](module-06-bff-fiber/41-fiber-group-routes/) | `/api/v1` route groups |
 | 42 | [fiber-error-handling](module-06-bff-fiber/42-fiber-error-handling/) | JSON ErrorHandler |
 
-## Module 07: Resilience Patterns (Exercises 43-48)
+## Module 07: Resilience Patterns (Exercises 43-48) — book ch. 11
 | # | Exercise | Topic |
 |---|----------|-------|
 | 43 | [circuit-breaker](module-07-resilience/43-circuit-breaker/) | Circuit breaker |
@@ -100,7 +121,7 @@ go test -v
 | 47 | [graceful-shutdown](module-07-resilience/47-graceful-shutdown/) | Cancel + WaitGroup shutdown |
 | 48 | [health-check-endpoint](module-07-resilience/48-health-check-endpoint/) | `/health` + `/ready` |
 
-## Module 08: Observability (Exercises 49-53)
+## Module 08: Observability (Exercises 49-53) — book ch. 13
 | # | Exercise | Topic |
 |---|----------|-------|
 | 49 | [structured-logging](module-08-observability/49-structured-logging/) | slog JSON logging |
@@ -109,14 +130,14 @@ go test -v
 | 52 | [distributed-tracing](module-08-observability/52-distributed-tracing/) | Tracer interface (Datadog-style) |
 | 53 | [metrics-collection](module-08-observability/53-metrics-collection/) | Labelled HTTP counters |
 
-## Module 09: Configuration with Viper (Exercises 54-56)
+## Module 09: Configuration with Viper (Exercises 54-56) — book ch. 12, 16
 | # | Exercise | Topic |
 |---|----------|-------|
 | 54 | [environment-config](module-09-viper-config/54-environment-config/) | Env var config |
 | 55 | [hot-reload-configmap](module-09-viper-config/55-hot-reload-configmap/) | Viper YAML/JSON hot reload |
 | 56 | [feature-flags](module-09-viper-config/56-feature-flags/) | Dynamic feature flags |
 
-## Module 10: Advanced BFF Patterns (Exercises 57-60)
+## Module 10: Advanced BFF Patterns (Exercises 57-60) — book ch. 11
 | # | Exercise | Topic |
 |---|----------|-------|
 | 57 | [parallel-http-requests](module-10-advanced/57-parallel-http-requests/) | Concurrent FetchAll + cancel |
@@ -124,7 +145,7 @@ go test -v
 | 59 | [pooling-and-reuse](module-10-advanced/59-pooling-and-reuse/) | sync.Pool buffer reuse |
 | 60 | [full-bff-integration](module-10-advanced/60-full-bff-integration/) | Fiber BFF + cache-aside |
 
-## Module 11: Data & Messaging (Exercises 61-66)
+## Module 11: Data & Messaging (Exercises 61-66) — book ch. 14–15
 | # | Exercise | Topic |
 |---|----------|-------|
 | 61 | [redis-get-set](module-11-data-messaging/61-redis-get-set/) | Cache Client / Get-Set |

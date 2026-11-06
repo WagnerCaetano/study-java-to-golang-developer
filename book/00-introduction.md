@@ -187,6 +187,25 @@ This book follows a deliberate progression:
 
 Each chapter links to hands-on exercises where you'll practice what you've learned.
 
+### Chapters vs exercise modules (important)
+
+**Book chapter numbers and exercise module numbers are not the same thing.**  
+One exercise module can cover **more than one** book chapter. Topics are grouped so you practice related ideas together.
+
+| After reading book chapters… | Do exercise module… |
+|------------------------------|---------------------|
+| 01 + 02 + 03 (fundamentals, structs, interfaces) | [Module 01 — Basics](../exercises/module-01-basics/) |
+| 04 (collections) | [Module 02 — Collections](../exercises/module-02-collections/) |
+| 05 (errors) | [Module 03 — Error Handling](../exercises/module-03-error-handling/) |
+| 06 + 07 (concurrency, context) | [Module 04 — Concurrency](../exercises/module-04-concurrency/) |
+| 08 + 09 + 10 (patterns, testing, profiling) | [Module 05 — Testing](../exercises/module-05-testing/) |
+| 11 (Fiber BFF) | [Modules 06, 07, 10](../exercises/README.md) |
+| 12 + 16 (Viper, feature flags) | [Module 09 — Viper Config](../exercises/module-09-viper-config/) |
+| 13 (observability) | [Module 08 — Observability](../exercises/module-08-observability/) |
+| 14 + 15 (Redis, DynamoDB, SNS) | [Module 11 — Data & Messaging](../exercises/module-11-data-messaging/) |
+
+Full mapping: [root README](../README.md) and [exercises/README.md](../exercises/README.md).
+
 ---
 
 ## 🧠 Mental Model Shift
