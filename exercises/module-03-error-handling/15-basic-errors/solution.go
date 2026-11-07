@@ -6,6 +6,11 @@ import "errors"
 // FIX ME: Return error for negative ages and ages > 150
 func ValidateAge(age int) error {
 	// FIX: Add validation
+	if age < 0 {
+		return ErrNegativeAge
+	} else if age > 150 {
+		return ErrTooOld
+	}
 	return nil
 }
 

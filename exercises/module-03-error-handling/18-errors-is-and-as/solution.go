@@ -16,11 +16,12 @@ var ErrUnauthorized = errors.New("unauthorized")
 // CheckNotFound should return true if the error wraps a NotFoundError
 // FIX ME: Use errors.As properly
 func CheckNotFound(err error) bool {
-	return false // FIX: use errors.As
+	var notFoundError *NotFoundError
+	return errors.As(err, &notFoundError)
 }
 
 // CheckUnauthorized should return true if the error is ErrUnauthorized
 // FIX ME: Use errors.Is properly
 func CheckUnauthorized(err error) bool {
-	return false // FIX: use errors.Is
+	return errors.Is(err, ErrUnauthorized)
 }
