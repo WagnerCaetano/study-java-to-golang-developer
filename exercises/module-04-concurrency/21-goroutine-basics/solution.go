@@ -1,35 +1,37 @@
 package goroutine
 
-import "sync"
-
-// ParallelSum sums a slice using numGoroutines goroutines
-// FIX ME: Split the work and use goroutines + WaitGroup
+// ParallelSum sums a slice using numGoroutines goroutines.
 func ParallelSum(nums []int, numGoroutines int) int {
-	var total int
-	var mu sync.Mutex
-	var wg sync.WaitGroup
+	if len(nums) == 0 {
+		return 0
+	}
+	if numGoroutines <= 0 {
+		numGoroutines = 1
+	}
+	if numGoroutines > len(nums) {
+		numGoroutines = len(nums)
+	}
 
 	chunkSize := len(nums) / numGoroutines
+	remainder := len(nums) % numGoroutines
+	results := make(chan int, numGoroutines)
+	start := 0
 
 	for i := 0; i < numGoroutines; i++ {
-		start := i * chunkSize
-		end := start + chunkSize
-		if i == numGoroutines-1 {
-			end = len(nums)
+		size := chunkSize
+		if i < remainder {
+			size++
 		}
-		wg.Add(1)
+		end := start + size
 		go func(slice []int) {
-			defer wg.Done()
 			sum := 0
 			for _, n := range slice {
 				sum += n
 			}
-			mu.Lock()
-			total += sum // FIX: This has a race condition! Use mutex properly.
-			mu.Unlock()
+			results <- sum
 		}(nums[start:end])
+		start = end
 	}
 
-	wg.Wait()
-	return total
+	return <-results // TODO: collect and add the result from every goroutine
 }

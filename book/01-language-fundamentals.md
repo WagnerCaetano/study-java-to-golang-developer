@@ -211,6 +211,29 @@ sum(1, 2, 3)       // 6
 sum(1, 2, 3, 4, 5) // 15
 ```
 
+### Deferred Calls (`defer`)
+
+The `defer` keyword schedules a function call to run when the surrounding
+function returns. It is commonly used for cleanup, such as closing a file or
+releasing a resource, so cleanup still happens on early returns.
+
+```go
+func processFile(path string) error {
+    file, err := os.Open(path)
+    if err != nil {
+        return err
+    }
+    defer file.Close()
+
+    // Read or process file here.
+    return nil
+}
+```
+
+Deferred calls run in last-in, first-out (LIFO) order. The deferred function's
+arguments are evaluated when the `defer` statement runs, while the call itself
+waits until the surrounding function returns.
+
 ---
 
 ## Built-in Types

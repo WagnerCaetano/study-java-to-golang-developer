@@ -7,21 +7,26 @@ func ParallelSum(nums []int, numGoroutines int) int {
 	var mu sync.Mutex
 	var wg sync.WaitGroup
 
-	chunkSize := len(nums) / numGoroutines
-	if chunkSize == 0 {
-		chunkSize = len(nums)
+	if len(nums) == 0 {
+		return 0
+	}
+	if numGoroutines <= 0 {
 		numGoroutines = 1
 	}
+	if numGoroutines > len(nums) {
+		numGoroutines = len(nums)
+	}
+
+	chunkSize := len(nums) / numGoroutines
+	remainder := len(nums) % numGoroutines
+	start := 0
 
 	for i := 0; i < numGoroutines; i++ {
-		start := i * chunkSize
-		end := start + chunkSize
-		if i == numGoroutines-1 {
-			end = len(nums)
+		size := chunkSize
+		if i < remainder {
+			size++
 		}
-		if start >= len(nums) {
-			break
-		}
+		end := start + size
 		wg.Add(1)
 		go func(slice []int) {
 			defer wg.Done()
@@ -33,6 +38,7 @@ func ParallelSum(nums []int, numGoroutines int) int {
 			total += sum
 			mu.Unlock()
 		}(nums[start:end])
+		start = end
 	}
 
 	wg.Wait()

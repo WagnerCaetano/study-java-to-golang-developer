@@ -191,6 +191,11 @@ func fetchWithTimeout(url string) (string, error) {
 
 ### Fan-Out / Fan-In
 
+Fan-out distributes work from one input across multiple goroutines so
+independent tasks can be processed concurrently. Fan-in gathers their results
+onto one output channel, giving callers a single stream to consume. Results may
+arrive in a different order than the inputs.
+
 ```go
 func fanOutFanIn(input <-chan int, workers int) <-chan int {
     results := make(chan int)
@@ -218,6 +223,11 @@ func fanOutFanIn(input <-chan int, workers int) <-chan int {
 ```
 
 ### Pipeline
+
+A pipeline splits processing into stages connected by channels. Each stage
+receives values, transforms or handles them, and sends them to the next stage.
+This makes processing steps composable and lets stages work concurrently as
+values flow through the pipeline.
 
 ```go
 func generate(nums ...int) <-chan int {
@@ -249,6 +259,11 @@ for result := range square(square(generate(1, 2, 3))) {
 ```
 
 ### Worker Pool
+
+A worker pool runs a fixed number of goroutines that pull tasks from a shared
+jobs channel and send completed results to an output channel. It is useful for
+processing many tasks concurrently while limiting concurrency and resource use,
+such as the number of simultaneous network requests.
 
 ```go
 func workerPool(jobs <-chan Job, results chan<- Result, workers int) {

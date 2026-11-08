@@ -1689,7 +1689,13 @@ cat > "$BASE/module-04-concurrency/21-goroutine-basics/README.md" << 'EOF'
 # Exercise 21: Goroutine Basics
 
 ## Problem
-Fix the `ParallelSum` function to sum numbers using multiple goroutines.
+Fix `ParallelSum` so it waits for every goroutine and combines all of their
+partial sums. The current implementation returns after receiving only one
+goroutine's result.
+
+The function should return `0` for an empty slice. If `numGoroutines` is zero
+or negative, treat it as one. It should also work when there are more requested
+goroutines than numbers.
 
 ## How to Test
 ```bash
@@ -1700,38 +1706,40 @@ EOF
 cat > "$BASE/module-04-concurrency/21-goroutine-basics/solution.go" << 'EOF'
 package goroutine
 
-import "sync"
-
-// ParallelSum sums a slice using numGoroutines goroutines
-// FIX ME: Split the work and use goroutines + WaitGroup
+// ParallelSum sums a slice using numGoroutines goroutines.
 func ParallelSum(nums []int, numGoroutines int) int {
-	var total int
-	var mu sync.Mutex
-	var wg sync.WaitGroup
+	if len(nums) == 0 {
+		return 0
+	}
+	if numGoroutines <= 0 {
+		numGoroutines = 1
+	}
+	if numGoroutines > len(nums) {
+		numGoroutines = len(nums)
+	}
 
 	chunkSize := len(nums) / numGoroutines
+	remainder := len(nums) % numGoroutines
+	results := make(chan int, numGoroutines)
+	start := 0
 
 	for i := 0; i < numGoroutines; i++ {
-		start := i * chunkSize
-		end := start + chunkSize
-		if i == numGoroutines-1 {
-			end = len(nums)
+		size := chunkSize
+		if i < remainder {
+			size++
 		}
-		wg.Add(1)
+		end := start + size
 		go func(slice []int) {
-			defer wg.Done()
 			sum := 0
 			for _, n := range slice {
 				sum += n
 			}
-			mu.Lock()
-			total += sum // FIX: This has a race condition! Use mutex properly.
-			mu.Unlock()
+			results <- sum
 		}(nums[start:end])
+		start = end
 	}
 
-	wg.Wait()
-	return total
+	return <-results // TODO: collect and add the result from every goroutine
 }
 EOF
 
@@ -1756,6 +1764,28 @@ func TestParallelSumSingle(t *testing.T) {
 		t.Errorf("ParallelSum = %d, want 6", result)
 	}
 }
+
+func TestParallelSumEdgeCases(t *testing.T) {
+	tests := []struct {
+		name          string
+		nums          []int
+		numGoroutines int
+		want          int
+	}{
+		{name: "empty input", nums: nil, numGoroutines: 4, want: 0},
+		{name: "more goroutines than numbers", nums: []int{1, 2, 3}, numGoroutines: 5, want: 6},
+		{name: "zero goroutines", nums: []int{1, 2, 3}, numGoroutines: 0, want: 6},
+		{name: "negative goroutines", nums: []int{1, 2, 3}, numGoroutines: -2, want: 6},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := ParallelSum(tt.nums, tt.numGoroutines); got != tt.want {
+				t.Errorf("ParallelSum = %d, want %d", got, tt.want)
+			}
+		})
+	}
+}
 EOF
 
 mkdir -p "$BASE/module-04-concurrency/21-goroutine-basics/_solution"
@@ -1769,21 +1799,26 @@ func ParallelSum(nums []int, numGoroutines int) int {
 	var mu sync.Mutex
 	var wg sync.WaitGroup
 
-	chunkSize := len(nums) / numGoroutines
-	if chunkSize == 0 {
-		chunkSize = len(nums)
+	if len(nums) == 0 {
+		return 0
+	}
+	if numGoroutines <= 0 {
 		numGoroutines = 1
 	}
+	if numGoroutines > len(nums) {
+		numGoroutines = len(nums)
+	}
+
+	chunkSize := len(nums) / numGoroutines
+	remainder := len(nums) % numGoroutines
+	start := 0
 
 	for i := 0; i < numGoroutines; i++ {
-		start := i * chunkSize
-		end := start + chunkSize
-		if i == numGoroutines-1 {
-			end = len(nums)
+		size := chunkSize
+		if i < remainder {
+			size++
 		}
-		if start >= len(nums) {
-			break
-		}
+		end := start + size
 		wg.Add(1)
 		go func(slice []int) {
 			defer wg.Done()
@@ -1795,6 +1830,7 @@ func ParallelSum(nums []int, numGoroutines int) int {
 			total += sum
 			mu.Unlock()
 		}(nums[start:end])
+		start = end
 	}
 
 	wg.Wait()
